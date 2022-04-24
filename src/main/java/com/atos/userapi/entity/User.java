@@ -1,4 +1,4 @@
-package com.atos.userapi.entities;
+package com.atos.userapi.entity;
 
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.enums.Gender;

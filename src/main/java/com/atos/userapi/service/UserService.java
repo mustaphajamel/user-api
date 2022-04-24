@@ -1,9 +1,9 @@
-package com.atos.userapi.services;
+package com.atos.userapi.service;
 
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.repository.UserRepository;
 import com.atos.userapi.dto.UserResponseDto;
-import com.atos.userapi.entities.User;
+import com.atos.userapi.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
