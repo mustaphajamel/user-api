@@ -3,6 +3,8 @@ package com.atos.userapi.controller;
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.dto.UserResponseDto;
 import com.atos.userapi.services.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,7 +23,8 @@ public class UserController {
     }
 
     @PostMapping("register")
-    public UserResponseDto registerUser(@RequestBody UserRequestDto user) {
-        return userService.registerUser(user);
+    public ResponseEntity<UserResponseDto> registerUser(@RequestBody UserRequestDto user) {
+
+        return new ResponseEntity<>(userService.registerUser(user), HttpStatus.CREATED);
     }
 }

@@ -54,7 +54,6 @@ public class UserControllerIT {
         when(userService.registerUser(userRequestDto)).thenReturn(userResponseDto);
 
         String userRequestBody = "{\n" +
-                "    \"id\": 1,\n" +
                 "    \"name\": \"aName\",\n" +
                 "    \"birthDate\": \""+df.format(aDate)+"\",\n" +
                 "    \"country\": \"FRANCE\",\n" +
@@ -68,7 +67,7 @@ public class UserControllerIT {
                 .content(userRequestBody));
 
         //THEN
-        MvcResult mvcResult = result.andExpect(status().isOk()).andReturn();
+        MvcResult mvcResult = result.andExpect(status().isCreated()).andReturn();
         String actualResponseBody = mvcResult.getResponse().getContentAsString();
         assertEquals(objectMapper.writeValueAsString(userResponseDto),actualResponseBody);
     }
