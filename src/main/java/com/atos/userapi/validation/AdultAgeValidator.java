@@ -13,7 +13,8 @@ public class AdultAgeValidator implements ConstraintValidator<ValidAdultAge, Dat
 
     @Override
     public boolean isValid(Date birthDate, ConstraintValidatorContext context) {
-        return ChronoUnit.YEARS.between(
+
+        return birthDate != null && ChronoUnit.YEARS.between(
                 birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now()) > ADULT_AGE;
     }
 }

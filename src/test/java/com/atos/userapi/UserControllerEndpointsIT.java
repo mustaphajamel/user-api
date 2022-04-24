@@ -39,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(UserController.class)
 @Import(ApplicationConfiguration.class)
-public class UserControllerIT {
+public class UserControllerEndpointsIT {
     @MockBean
     private UserService userService;
     @MockBean
