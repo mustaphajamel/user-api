@@ -59,12 +59,12 @@ public class UserControllerEndpointsIT {
         Date aDate = df.parse("2000-04-24");
 
         UserRequestDto userRequestDto = new UserRequestDto("aName", aDate, "FRANCE", "20000", Gender.MALE);
-        UserResponseDto userResponseDto = new UserResponseDto(1L,"aName", aDate, "FRANCE", "20000", Gender.MALE);
+        UserResponseDto userResponseDto = new UserResponseDto(1L, "aName", aDate, "FRANCE", "20000", Gender.MALE);
         when(userRepository.save(userRequestDto.toUserEntity())).thenReturn(userResponseDto.toUserEntity());
 
         String userRequestBody = "{\n" +
                 "    \"name\": \"aName\",\n" +
-                "    \"birthDate\": \""+df.format(aDate)+"\",\n" +
+                "    \"birthDate\": \"" + df.format(aDate) + "\",\n" +
                 "    \"country\": \"FRANCE\",\n" +
                 "    \"phoneNumber\": \"20000\",\n" +
                 "    \"gender\": \"MALE\"\n" +
@@ -78,7 +78,7 @@ public class UserControllerEndpointsIT {
         //THEN
         MvcResult mvcResult = result.andExpect(status().isCreated()).andReturn();
         String actualResponseBody = mvcResult.getResponse().getContentAsString();
-        assertEquals(objectMapper.writeValueAsString(userResponseDto),actualResponseBody);
+        assertEquals(objectMapper.writeValueAsString(userResponseDto), actualResponseBody);
     }
 
     @SneakyThrows
@@ -96,13 +96,13 @@ public class UserControllerEndpointsIT {
 
         //WHEN
         ResultActions resultGet = mockMvc.perform(get("/users/details")
-                        .param("id", String.valueOf(userId)));
+                .param("id", String.valueOf(userId)));
 
         //THEN
         MockHttpServletResponse response = resultGet.andExpect(status().isOk())
                 .andReturn().getResponse();
         String responseContentAsString = response.getContentAsString();
-        assertEquals(objectMapper.writeValueAsString(expectedUser.toUserResponseDto()),responseContentAsString);
+        assertEquals(objectMapper.writeValueAsString(expectedUser.toUserResponseDto()), responseContentAsString);
     }
 
     @SneakyThrows

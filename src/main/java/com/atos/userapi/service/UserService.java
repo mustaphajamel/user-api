@@ -1,9 +1,9 @@
 package com.atos.userapi.service;
 
 import com.atos.userapi.dto.UserRequestDto;
-import com.atos.userapi.repository.UserRepository;
 import com.atos.userapi.dto.UserResponseDto;
 import com.atos.userapi.entity.User;
+import com.atos.userapi.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public UserResponseDto getUserDetails(Long id) {
-        logger.info("start getting user derails. userId ="+id);
+        logger.info("start getting user derails. userId =" + id);
         return userRepository.findById(id).map(User::toUserResponseDto).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "entity not found"
         ));

@@ -21,7 +21,7 @@ public class ControllerExceptionHandler {
     ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         return new ApiError(HttpStatus.BAD_REQUEST, REQUEST_VALIDATION_FAIL,
                 e.getBindingResult().getFieldErrors().stream()
-                .map(filedError -> String.format("%s %s %s", filedError.getField(), VALIDATION_ERROR_SEPERATOR, filedError
-                .getDefaultMessage())).collect(Collectors.toList()));
+                        .map(filedError -> String.format("%s %s %s", filedError.getField(), VALIDATION_ERROR_SEPERATOR, filedError
+                                .getDefaultMessage())).collect(Collectors.toList()));
     }
 }

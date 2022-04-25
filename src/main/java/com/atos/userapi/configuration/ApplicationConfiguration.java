@@ -11,7 +11,7 @@ import java.util.TimeZone;
 public class ApplicationConfiguration {
 
     @Bean
-    public TimeZone timeZone(){
+    public TimeZone timeZone() {
         TimeZone defaultTimeZone = TimeZone.getTimeZone("UTC");
         TimeZone.setDefault(defaultTimeZone);
         return defaultTimeZone;

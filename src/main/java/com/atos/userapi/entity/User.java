@@ -1,16 +1,15 @@
 package com.atos.userapi.entity;
 
 import com.atos.userapi.dto.UserRequestDto;
-import com.atos.userapi.enums.Gender;
 import com.atos.userapi.dto.UserResponseDto;
+import com.atos.userapi.enums.Gender;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
-
-import lombok.Data;
 
 @Entity
 @Data

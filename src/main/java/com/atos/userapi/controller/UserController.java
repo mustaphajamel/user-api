@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
 @Aspect
 @RestController
 @RequestMapping("users")
@@ -34,6 +35,4 @@ public class UserController {
         logger.info("Enter registerUser controller");
         return new ResponseEntity<>(userService.registerUser(user), HttpStatus.CREATED);
     }
-
-
 }
