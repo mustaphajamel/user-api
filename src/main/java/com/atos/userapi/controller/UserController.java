@@ -1,6 +1,6 @@
 package com.atos.userapi.controller;
 
-import com.atos.userapi.configuration.SLF4JExample;
+import com.atos.userapi.configuration.SLF4J;
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.dto.UserResponseDto;
 import com.atos.userapi.service.UserService;
@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("users")
 public class UserController {
-    private static final Logger logger = LoggerFactory.getLogger(SLF4JExample.class);
+    private static final Logger logger = LoggerFactory.getLogger(SLF4J.class);
 
     private final UserService userService;
 

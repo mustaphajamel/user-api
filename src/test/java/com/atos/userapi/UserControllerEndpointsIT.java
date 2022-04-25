@@ -3,7 +3,7 @@ package com.atos.userapi;
 
 
 import com.atos.userapi.configuration.ApplicationConfiguration;
-import com.atos.userapi.configuration.SLF4JExample;
+import com.atos.userapi.configuration.SLF4J;
 import com.atos.userapi.controller.UserController;
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.dto.UserResponseDto;
@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(UserController.class)
 @Import(ApplicationConfiguration.class)
 public class UserControllerEndpointsIT {
-    private static final Logger logger = LoggerFactory.getLogger(SLF4JExample.class);
+    private static final Logger logger = LoggerFactory.getLogger(SLF4J.class);
 
     @MockBean
     private UserService userService;

@@ -1,6 +1,6 @@
 package com.atos.userapi;
 
-import com.atos.userapi.configuration.SLF4JExample;
+import com.atos.userapi.configuration.SLF4J;
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.enums.Gender;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserValidationTest {
-    private static Logger logger = LoggerFactory.getLogger(SLF4JExample.class);
+    private static Logger logger = LoggerFactory.getLogger(SLF4J.class);
 
     @Test
     public void a_french_user_should_be_valid() throws ParseException {

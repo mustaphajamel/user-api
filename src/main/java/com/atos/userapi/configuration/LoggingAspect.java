@@ -14,7 +14,7 @@ import org.springframework.util.StopWatch;
 @Component
 public class LoggingAspect 
 {
-  private static final Logger logger = LoggerFactory.getLogger(SLF4JExample.class);
+  private static final Logger logger = LoggerFactory.getLogger(SLF4J.class);
 
   @Pointcut(value = "execution(* com.atos.userapi.*.*.*.(..))")
   public void myPointCut(){
