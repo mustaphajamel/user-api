@@ -54,7 +54,7 @@ public class UserControllerEndpointsIT {
     void register_a_valid_user() throws Exception {
         //GIVEN
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Date aDate = df.parse("2022-04-24");
+        Date aDate = df.parse("2000-04-24");
 
         UserRequestDto userRequestDto = new UserRequestDto("aName", aDate, "FRANCE", "20000", Gender.MALE);
         UserResponseDto userResponseDto = new UserResponseDto(1L,"aName", aDate, "FRANCE", "20000", Gender.MALE);
