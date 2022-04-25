@@ -1,9 +1,7 @@
 package com.atos.userapi;
 
 
-
 import com.atos.userapi.configuration.ApplicationConfiguration;
-import com.atos.userapi.configuration.SLF4J;
 import com.atos.userapi.controller.UserController;
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.dto.UserResponseDto;
@@ -15,8 +13,6 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.internal.util.reflection.Whitebox;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -43,7 +39,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(UserController.class)
 @Import(ApplicationConfiguration.class)
 public class UserControllerEndpointsIT {
-    private static final Logger logger = LoggerFactory.getLogger(SLF4J.class);
 
     @MockBean
     private UserService userService;
@@ -57,7 +52,6 @@ public class UserControllerEndpointsIT {
 
     @Test
     void register_a_valid_user() throws Exception {
-        logger.info("TEST : if a valid user register correctly");
 
         //GIVEN
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -90,7 +84,6 @@ public class UserControllerEndpointsIT {
     @Test
     void get_an_existing_user() {
 
-        logger.info("TEST : If an existing user displayed correctly");
 
         //GIVEN
         long userId = 1L;
@@ -118,7 +111,6 @@ public class UserControllerEndpointsIT {
     @Test
     public void get_a_non_existing_user() {
 
-        logger.info("TEST : If a non existing user displayed");
 
         //GIVEN
         long userId = 1L;

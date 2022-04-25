@@ -1,6 +1,5 @@
 package com.atos.userapi.service;
 
-import com.atos.userapi.configuration.SLF4J;
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.repository.UserRepository;
 import com.atos.userapi.dto.UserResponseDto;
@@ -14,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class UserService {
 
-    private static final Logger logger = LoggerFactory.getLogger(SLF4J.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
 
