@@ -16,12 +16,12 @@ public class LoggingAspect
 {
   private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
-  @Pointcut(value = "execution(* com.atos.userapi.*.*.*.(..))")
-  public void myPointCut(){
+  @Pointcut(value = "execution(* com.atos.userapi..*(..)))")
+  public void loggingPointCut(){
 
   }
   //AOP expression for which methods shall be intercepted
-  @Around("execution(* com.atos.userapi..*(..)))")
+  @Around("loggingPointCut()")
   public Object profileAllMethods(ProceedingJoinPoint proceedingJoinPoint) throws Throwable 
   {
     MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
