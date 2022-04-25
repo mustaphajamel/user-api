@@ -1,5 +1,6 @@
 package com.atos.userapi.dto;
 
+import com.atos.userapi.entity.User;
 import com.atos.userapi.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -18,4 +19,8 @@ public class UserResponseDto {
     private String country;
     private String phoneNumber;
     private Gender gender;
+
+    public User toUserEntity() {
+        return new User(id, name, birthDate, country, phoneNumber, gender);
+    }
 }

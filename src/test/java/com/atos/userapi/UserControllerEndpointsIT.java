@@ -5,6 +5,7 @@ import com.atos.userapi.configuration.ApplicationConfiguration;
 import com.atos.userapi.controller.UserController;
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.dto.UserResponseDto;
+import com.atos.userapi.entity.User;
 import com.atos.userapi.enums.Gender;
 import com.atos.userapi.repository.UserRepository;
 import com.atos.userapi.service.UserService;
@@ -12,10 +13,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.internal.util.reflection.Whitebox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -40,8 +41,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import(ApplicationConfiguration.class)
 public class UserControllerEndpointsIT {
 
-    @MockBean
+    @SpyBean
     private UserService userService;
+
     @MockBean
     private UserRepository userRepository;
     @Autowired
@@ -52,14 +54,13 @@ public class UserControllerEndpointsIT {
 
     @Test
     void register_a_valid_user() throws Exception {
-
         //GIVEN
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date aDate = df.parse("2000-04-24");
 
         UserRequestDto userRequestDto = new UserRequestDto("aName", aDate, "FRANCE", "20000", Gender.MALE);
         UserResponseDto userResponseDto = new UserResponseDto(1L,"aName", aDate, "FRANCE", "20000", Gender.MALE);
-        when(userService.registerUser(userRequestDto)).thenReturn(userResponseDto);
+        when(userRepository.save(userRequestDto.toUserEntity())).thenReturn(userResponseDto.toUserEntity());
 
         String userRequestBody = "{\n" +
                 "    \"name\": \"aName\",\n" +
@@ -83,16 +84,15 @@ public class UserControllerEndpointsIT {
     @SneakyThrows
     @Test
     void get_an_existing_user() {
-
-
         //GIVEN
         long userId = 1L;
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date aDate = df.parse("2022-04-24");
 
-        UserResponseDto expectedResponse = new UserResponseDto(userId, "aName",
+        User expectedUser = new User(userId, "aName",
                 aDate, "FRANCE", "20000", Gender.MALE);
-        when(userService.getUserDetails(userId)).thenReturn(expectedResponse);
+
+        when(userRepository.findById(userId)).thenReturn(Optional.of(expectedUser));
 
         //WHEN
         ResultActions resultGet = mockMvc.perform(get("/users/details")
@@ -102,16 +102,12 @@ public class UserControllerEndpointsIT {
         MockHttpServletResponse response = resultGet.andExpect(status().isOk())
                 .andReturn().getResponse();
         String responseContentAsString = response.getContentAsString();
-        assertEquals(objectMapper.writeValueAsString(expectedResponse),responseContentAsString);
-
-
-
+        assertEquals(objectMapper.writeValueAsString(expectedUser.toUserResponseDto()),responseContentAsString);
     }
+
     @SneakyThrows
     @Test
     public void get_a_non_existing_user() {
-
-
         //GIVEN
         long userId = 1L;
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -119,9 +115,6 @@ public class UserControllerEndpointsIT {
 
         UserResponseDto expectedResponse = new UserResponseDto(userId, "aName",
                 aDate, "FRANCE", "20000", Gender.MALE);
-
-        when(userService.getUserDetails(userId)).thenCallRealMethod();
-        Whitebox.setInternalState(userService, "userRepository", userRepository);
 
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
 

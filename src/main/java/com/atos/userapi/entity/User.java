@@ -37,6 +37,15 @@ public class User {
         this.gender = gender;
     }
 
+    public User(long id, String name, Date birthDate, String country, String phoneNumber, Gender gender) {
+        this.id = id;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+    }
+
     public UserRequestDto toUserRequestDto() {
         return new UserRequestDto(this.name, this.birthDate, this.country, this.phoneNumber, this.gender);
     }
