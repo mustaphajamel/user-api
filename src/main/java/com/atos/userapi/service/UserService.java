@@ -22,14 +22,14 @@ public class UserService {
     }
 
     public UserResponseDto getUserDetails(Long id) {
-        logger.info("start getting user derails. userId =" + id);
+        logger.info("start getting user derails where userId =" + id);
         return userRepository.findById(id).map(User::toUserResponseDto).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "entity not found"
         ));
     }
 
     public UserResponseDto registerUser(UserRequestDto userRequestDto) {
-        logger.info("start registering a user ");
+        logger.info("start registering a user");
         User userSaved = userRepository.save(userRequestDto.toUserEntity());
         return userSaved.toUserResponseDto();
     }
