@@ -3,12 +3,11 @@ package com.atos.userapi.service;
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.dto.UserResponseDto;
 import com.atos.userapi.entity.User;
+import com.atos.userapi.exception.UserNotFoundException;
 import com.atos.userapi.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 /**
  * Class {@code UserService}
@@ -28,11 +27,11 @@ public class UserService {
      * @param id - ID of the user to get
      * @return UserResponseDto
      */
-    public UserResponseDto getUserDetails(Long id) {
+    public UserResponseDto getUserDetails(Long id) throws UserNotFoundException {
         logger.info("start getting user derails where userId =" + id);
-        return userRepository.findById(id).map(User::toUserResponseDto).orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "User not found"
-        ));
+        return userRepository.findById(id)
+                .map(User::toUserResponseDto)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
     /**

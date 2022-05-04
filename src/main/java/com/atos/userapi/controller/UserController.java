@@ -2,6 +2,7 @@ package com.atos.userapi.controller;
 
 import com.atos.userapi.dto.UserRequestDto;
 import com.atos.userapi.dto.UserResponseDto;
+import com.atos.userapi.exception.UserNotFoundException;
 import com.atos.userapi.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -39,7 +41,13 @@ public class UserController {
     @GetMapping("/{id}")
     public UserResponseDto getUserDetails(@PathVariable Long id) throws UserNotFoundException {
         logger.info("Enter getUserDetails controller");
-        return userService.getUserDetails(id);
+        UserResponseDto userDetails;
+        try {
+            userDetails = userService.getUserDetails(id);
+        } catch (UserNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+        return userDetails;
     }
 
     /**
