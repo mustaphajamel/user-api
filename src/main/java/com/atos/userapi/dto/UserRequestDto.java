@@ -13,6 +13,9 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
+/**
+ * Class {@code UserRequestDto}
+ */
 @Data
 @AllArgsConstructor
 public class UserRequestDto {

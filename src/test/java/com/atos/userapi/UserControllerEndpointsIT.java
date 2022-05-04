@@ -71,7 +71,7 @@ public class UserControllerEndpointsIT {
                 "}";
 
         //WHEN
-        ResultActions result = mockMvc.perform(post("/users/register")
+        ResultActions result = mockMvc.perform(post("/users/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(userRequestBody));
 
@@ -95,8 +95,8 @@ public class UserControllerEndpointsIT {
         when(userRepository.findById(userId)).thenReturn(Optional.of(expectedUser));
 
         //WHEN
-        ResultActions resultGet = mockMvc.perform(get("/users/details")
-                .param("id", String.valueOf(userId)));
+        ResultActions resultGet = mockMvc
+                .perform(get("/users/{id}",String.valueOf(userId)));
 
         //THEN
         MockHttpServletResponse response = resultGet.andExpect(status().isOk())
@@ -113,14 +113,12 @@ public class UserControllerEndpointsIT {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date aDate = df.parse("2022-04-24");
 
-        UserResponseDto expectedResponse = new UserResponseDto(userId, "aName",
-                aDate, "FRANCE", "20000", Gender.MALE);
 
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
         //WHEN
-        ResultActions resultGet = mockMvc.perform(get("/users/details")
-                .param("id", String.valueOf(userId)));
+        ResultActions resultGet = mockMvc
+                .perform(get("/users/{id}",String.valueOf(userId)));
 
         //THEN
         resultGet.andExpect(status().isNotFound());

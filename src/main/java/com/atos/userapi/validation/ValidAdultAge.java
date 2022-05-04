@@ -9,6 +9,9 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+/**
+ * Interface: {@code ValidAdultAge}
+ */
 @Constraint(validatedBy = AdultAgeValidator.class)
 @Target({FIELD})
 @Retention(RUNTIME)

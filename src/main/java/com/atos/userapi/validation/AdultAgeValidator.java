@@ -7,10 +7,18 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+/**
+ * Class {@code AdultAgeValidator}
+ */
 public class AdultAgeValidator implements ConstraintValidator<ValidAdultAge, Date> {
 
     public static final int ADULT_AGE = 18;
 
+    /**
+     * @param birthDate - birthday date of the user
+     * @param context - Validator context
+     * @return boolean
+     */
     @Override
     public boolean isValid(Date birthDate, ConstraintValidatorContext context) {
 

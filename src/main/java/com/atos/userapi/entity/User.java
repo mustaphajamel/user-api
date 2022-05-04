@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
+/**
+ * Class {@code User}
+ */
 @Entity
 @Data
 public class User {

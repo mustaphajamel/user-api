@@ -8,6 +8,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * Class {@code UserResponseDto}
+ */
 @Data
 @AllArgsConstructor
 public class UserResponseDto {
